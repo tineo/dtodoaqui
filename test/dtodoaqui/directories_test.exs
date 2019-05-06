@@ -170,4 +170,71 @@ defmodule Dtodoaqui.DirectoriesTest do
       assert %Ecto.Changeset{} = Directories.change_listing(listing)
     end
   end
+
+  describe "fields" do
+    alias Dtodoaqui.Directories.Field
+
+    @valid_attrs %{created: "2010-04-17T14:00:00Z", data_key: "some data_key", data_value: "some data_value", listing_id: 42, modified: "2010-04-17T14:00:00Z"}
+    @update_attrs %{created: "2011-05-18T15:01:01Z", data_key: "some updated data_key", data_value: "some updated data_value", listing_id: 43, modified: "2011-05-18T15:01:01Z"}
+    @invalid_attrs %{created: nil, data_key: nil, data_value: nil, listing_id: nil, modified: nil}
+
+    def field_fixture(attrs \\ %{}) do
+      {:ok, field} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Directories.create_field()
+
+      field
+    end
+
+    test "list_fields/0 returns all fields" do
+      field = field_fixture()
+      assert Directories.list_fields() == [field]
+    end
+
+    test "get_field!/1 returns the field with given id" do
+      field = field_fixture()
+      assert Directories.get_field!(field.id) == field
+    end
+
+    test "create_field/1 with valid data creates a field" do
+      assert {:ok, %Field{} = field} = Directories.create_field(@valid_attrs)
+      assert field.created == DateTime.from_naive!(~N[2010-04-17T14:00:00Z], "Etc/UTC")
+      assert field.data_key == "some data_key"
+      assert field.data_value == "some data_value"
+      assert field.listing_id == 42
+      assert field.modified == DateTime.from_naive!(~N[2010-04-17T14:00:00Z], "Etc/UTC")
+    end
+
+    test "create_field/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Directories.create_field(@invalid_attrs)
+    end
+
+    test "update_field/2 with valid data updates the field" do
+      field = field_fixture()
+      assert {:ok, %Field{} = field} = Directories.update_field(field, @update_attrs)
+      assert field.created == DateTime.from_naive!(~N[2011-05-18T15:01:01Z], "Etc/UTC")
+      assert field.data_key == "some updated data_key"
+      assert field.data_value == "some updated data_value"
+      assert field.listing_id == 43
+      assert field.modified == DateTime.from_naive!(~N[2011-05-18T15:01:01Z], "Etc/UTC")
+    end
+
+    test "update_field/2 with invalid data returns error changeset" do
+      field = field_fixture()
+      assert {:error, %Ecto.Changeset{}} = Directories.update_field(field, @invalid_attrs)
+      assert field == Directories.get_field!(field.id)
+    end
+
+    test "delete_field/1 deletes the field" do
+      field = field_fixture()
+      assert {:ok, %Field{}} = Directories.delete_field(field)
+      assert_raise Ecto.NoResultsError, fn -> Directories.get_field!(field.id) end
+    end
+
+    test "change_field/1 returns a field changeset" do
+      field = field_fixture()
+      assert %Ecto.Changeset{} = Directories.change_field(field)
+    end
+  end
 end

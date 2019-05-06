@@ -11,11 +11,7 @@ defmodule DtodoaquiWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug CORSPlug, origin: "*"
-    plug :accepts, ["json"]
-  end
-
+  
   pipeline :jwt_authenticated do
     plug Guardian.AuthPipeline
   end
@@ -46,17 +42,5 @@ defmodule DtodoaquiWeb.Router do
     get "/my_user", UserController, :show
   end
 
-  scope "/api/swagger" do
-    forward "/", PhoenixSwagger.Plug.SwaggerUI, otp_app: :dtodoaqui, swagger_file: "swagger.json"
-  end
-
-  def swagger_info do
-    %{
-      info: %{
-        version: "1.0",
-        title: "Dtodoaqui"
-      }
-    }
-  end
 
 end
