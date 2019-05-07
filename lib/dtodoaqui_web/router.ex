@@ -11,6 +11,10 @@ defmodule DtodoaquiWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :api do
+    plug CORSPlug, origin: "*"
+    plug :accepts, ["json"]
+  end
   
   pipeline :jwt_authenticated do
     plug Guardian.AuthPipeline
