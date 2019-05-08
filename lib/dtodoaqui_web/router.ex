@@ -46,5 +46,18 @@ defmodule DtodoaquiWeb.Router do
     get "/my_user", UserController, :show
   end
 
+  scope "/api/swagger" do
+    forward "/", PhoenixSwagger.Plug.SwaggerUI, otp_app: :dtodoaqui, swagger_file: "swagger.json"
+  end
+
+  def swagger_info do
+    %{
+      info: %{
+        version: "1.0",
+        title: "Dtodoaqui"
+      }
+    }
+  end
+
 
 end
