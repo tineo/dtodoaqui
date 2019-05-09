@@ -34,7 +34,7 @@ defmodule DtodoaquiWeb.Router do
   scope "/api", DtodoaquiWeb do
     pipe_through :api
 
-    resources "/users", UserController#, only: [:create, :show]
+    resources "/users", UserController, only: [:create, :show]
     options   "/users", UserController, :options
     post "/sign_up", UserController, :create
     post "/sign_in", UserController, :sign_in
