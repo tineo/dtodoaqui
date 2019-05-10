@@ -33,8 +33,15 @@ defmodule DtodoaquiWeb.Router do
 
   scope "/api", DtodoaquiWeb do
     pipe_through :api
-
-    resources "/users", UserController, only: [:create, :show]
+    #  GET      /api/users           DtodoaquiWeb.UserController :index
+    #  GET      /api/users/:id/edit  DtodoaquiWeb.UserController :edit
+    #  GET      /api/users/new       DtodoaquiWeb.UserController :new
+    #  GET      /api/users/:id       DtodoaquiWeb.UserController :show
+    #  POST     /api/users           DtodoaquiWeb.UserController :create
+    #  PATCH    /api/users/:id       DtodoaquiWeb.UserController :update
+    #  PUT      /api/users/:id       DtodoaquiWeb.UserController :update
+    #  DELETE   /api/users/:id       DtodoaquiWeb.UserController :delete
+    resources "/users", UserController, only: [:index, :create, :show, :update, :delete]
     options   "/users", UserController, :options
     post "/sign_up", UserController, :create
     post "/sign_in", UserController, :sign_in
