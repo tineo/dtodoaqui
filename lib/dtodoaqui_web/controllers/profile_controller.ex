@@ -27,7 +27,7 @@ defmodule DtodoaquiWeb.ProfileController do
     render(conn, "show.json", profile: profile)
   end
 
-  def show_jwt(conn, _params) do
+  def show_profile_jwt(conn, _params) do
     user = Guardian.Plug.current_resource(conn)
     user |> IO.inspect
     user.id |> IO.inspect

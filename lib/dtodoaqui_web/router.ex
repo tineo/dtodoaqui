@@ -63,8 +63,8 @@ defmodule DtodoaquiWeb.Router do
   scope "/api", DtodoaquiWeb do
     pipe_through [:api, :jwt_authenticated]
 
-    get "/my_profile", ProfileController, :show_jwt
-    get "/my_user", UserController, :show_jwt
+    get "/my_profile", ProfileController, :show_profile_jwt
+    get "/my_user", UserController, :show_user_jwt
   end
 
   scope "/api/swagger" do
