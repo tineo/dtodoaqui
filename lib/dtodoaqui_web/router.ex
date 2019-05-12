@@ -51,8 +51,8 @@ defmodule DtodoaquiWeb.Router do
 
     get "/search", LocationController, :search
 
-    resources "/profile", UserController, only: [:index, :create, :show, :update, :delete]
-    options   "/profile", UserController, :options
+    resources "/profile", ProfileController, only: [:index, :create, :show, :update, :delete]
+    options   "/profile", ProfileController, :options
   end
 
   scope "/api", DtodoaquiWeb do
