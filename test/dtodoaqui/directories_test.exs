@@ -237,4 +237,71 @@ defmodule Dtodoaqui.DirectoriesTest do
       assert %Ecto.Changeset{} = Directories.change_field(field)
     end
   end
+
+  describe "categories" do
+    alias Dtodoaqui.Directories.Category
+
+    @valid_attrs %{created: "2010-04-17T14:00:00Z", font_icon: "some font_icon", modified: "2010-04-17T14:00:00Z", name: "some name", slug: "some slug"}
+    @update_attrs %{created: "2011-05-18T15:01:01Z", font_icon: "some updated font_icon", modified: "2011-05-18T15:01:01Z", name: "some updated name", slug: "some updated slug"}
+    @invalid_attrs %{created: nil, font_icon: nil, modified: nil, name: nil, slug: nil}
+
+    def category_fixture(attrs \\ %{}) do
+      {:ok, category} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Directories.create_category()
+
+      category
+    end
+
+    test "list_categories/0 returns all categories" do
+      category = category_fixture()
+      assert Directories.list_categories() == [category]
+    end
+
+    test "get_category!/1 returns the category with given id" do
+      category = category_fixture()
+      assert Directories.get_category!(category.id) == category
+    end
+
+    test "create_category/1 with valid data creates a category" do
+      assert {:ok, %Category{} = category} = Directories.create_category(@valid_attrs)
+      assert category.created == DateTime.from_naive!(~N[2010-04-17T14:00:00Z], "Etc/UTC")
+      assert category.font_icon == "some font_icon"
+      assert category.modified == DateTime.from_naive!(~N[2010-04-17T14:00:00Z], "Etc/UTC")
+      assert category.name == "some name"
+      assert category.slug == "some slug"
+    end
+
+    test "create_category/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Directories.create_category(@invalid_attrs)
+    end
+
+    test "update_category/2 with valid data updates the category" do
+      category = category_fixture()
+      assert {:ok, %Category{} = category} = Directories.update_category(category, @update_attrs)
+      assert category.created == DateTime.from_naive!(~N[2011-05-18T15:01:01Z], "Etc/UTC")
+      assert category.font_icon == "some updated font_icon"
+      assert category.modified == DateTime.from_naive!(~N[2011-05-18T15:01:01Z], "Etc/UTC")
+      assert category.name == "some updated name"
+      assert category.slug == "some updated slug"
+    end
+
+    test "update_category/2 with invalid data returns error changeset" do
+      category = category_fixture()
+      assert {:error, %Ecto.Changeset{}} = Directories.update_category(category, @invalid_attrs)
+      assert category == Directories.get_category!(category.id)
+    end
+
+    test "delete_category/1 deletes the category" do
+      category = category_fixture()
+      assert {:ok, %Category{}} = Directories.delete_category(category)
+      assert_raise Ecto.NoResultsError, fn -> Directories.get_category!(category.id) end
+    end
+
+    test "change_category/1 returns a category changeset" do
+      category = category_fixture()
+      assert %Ecto.Changeset{} = Directories.change_category(category)
+    end
+  end
 end

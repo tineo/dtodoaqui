@@ -7,6 +7,7 @@ defmodule Dtodoaqui.Accounts do
   alias Dtodoaqui.Repo
 
   alias Dtodoaqui.Accounts.User
+  alias Dtodoaqui.Accounts.Profile
 
   alias Dtodoaqui.Guardian
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
@@ -237,4 +238,12 @@ defmodule Dtodoaqui.Accounts do
   def change_profile(%Profile{} = profile) do
     Profile.changeset(profile, %{})
   end
+
+  def get_profile_by!(user_id) do
+    user_id |> IO.inspect
+    query = from p in Profile, where: p.user_id == ^user_id
+    Repo.all(query)
+  end
+
+
 end

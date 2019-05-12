@@ -4,6 +4,8 @@ defmodule DtodoaquiWeb.ProfileController do
   alias Dtodoaqui.Accounts
   alias Dtodoaqui.Accounts.Profile
 
+  alias Dtodoaqui.Guardian
+
   action_fallback DtodoaquiWeb.FallbackController
 
   def index(conn, _params) do
@@ -23,6 +25,20 @@ defmodule DtodoaquiWeb.ProfileController do
   def show(conn, %{"id" => id}) do
     profile = Accounts.get_profile!(id)
     render(conn, "show.json", profile: profile)
+  end
+
+  def show_jwt(conn, _params) do
+    user = Guardian.Plug.current_resource(conn)
+    user |> IO.inspect
+    user.id |> IO.inspect
+    profile = Accounts.get_profile_by!(user.id)
+    profile |> IO.inspect
+    case profile do
+      [] -> send_resp(conn, :no_content, "")
+      _ -> conn |> render("profile.json", profile: profile)
+    end
+
+
   end
 
   def update(conn, %{"id" => id, "profile" => profile_params}) do
