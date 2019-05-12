@@ -32,14 +32,21 @@ defmodule Dtodoaqui.Accounts.User do
   #end
   @doc false
   def changeset(%User{} = user, attrs) do
-    user
-    |> cast(attrs, [:username, :email, :password, :password_confirmation]) # Remove hash, add pw + pw confirmation
-    |> validate_required([:email, :password, :password_confirmation]) # Remove hash, add pw + pw confirmation
-    |> validate_format(:email, ~r/@/) # Check that email is valid
-    |> validate_length(:password, min: 8) # Check that password length is >= 8 
-    |> validate_confirmation(:password) # Check that password === password_confirmation
-    |> unique_constraint(:email)
-    |> put_password_hash 
+    IO.inspect(attrs)
+    IO.inspect(Map.has_key?(attrs, :password_confirmation))
+    IO.inspect(Map.keys(attrs))
+
+    case Map.has_key?(attrs, :password_confirmation) do
+      true -> user
+              |> cast(attrs, [:username, :email, :password, :password_confirmation]) # Remove hash, add pw + pw confirmation
+              |> validate_required([:username, :email, :password, :password_confirmation]) # Remove hash, add pw + pw confirmation
+              |> validate_format(:email, ~r/@/) # Check that email is valid
+              |> validate_length(:password, min: 8) # Check that password length is >= 8
+              |> validate_confirmation(:password) # Check that password === password_confirmation
+              |> unique_constraint(:email)
+              |> put_password_hash
+      _ -> user |> cast(attrs, [:is_verified, :last_login, :modified, :password_confirmation, :username])
+    end
   end
 
   defp put_password_hash(changeset) do

@@ -45,6 +45,9 @@ defmodule DtodoaquiWeb.Router do
     options   "/users", UserController, :options
     post "/sign_up", UserController, :create
     post "/sign_in", UserController, :sign_in
+
+    resources "/location", LocationController, only: [:index, :create, :show, :update, :delete]
+    options   "/location", LocationController, :options
   end
 
   scope "/api", DtodoaquiWeb do
