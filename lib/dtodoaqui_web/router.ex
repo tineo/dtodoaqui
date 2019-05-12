@@ -55,7 +55,7 @@ defmodule DtodoaquiWeb.Router do
     options   "/profile", ProfileController, :options
 
     resources "/categories", CategoryController, except: [:new, :edit]
-    options   "/categories", LocationController, :options
+    options   "/categories", CategoryController, :options
 
 
   end
@@ -63,8 +63,8 @@ defmodule DtodoaquiWeb.Router do
   scope "/api", DtodoaquiWeb do
     pipe_through [:api, :jwt_authenticated]
 
-    get "/my_user", UserController, :show_jwt
     get "/my_profile", ProfileController, :show_jwt
+    get "/my_user", UserController, :show_jwt
   end
 
   scope "/api/swagger" do
