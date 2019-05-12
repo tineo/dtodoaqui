@@ -7,6 +7,7 @@ defmodule Dtodoaqui.Directories do
   alias Dtodoaqui.Repo
 
   alias Dtodoaqui.Directories.Location
+  alias Dtodoaqui.Directories.Category
 
   @doc """
   Returns the list of locations.
@@ -294,7 +295,7 @@ defmodule Dtodoaqui.Directories do
     Field.changeset(field, %{})
   end
 
-  alias Dtodoaqui.Directories.Category
+
 
   @doc """
   Returns the list of categories.
