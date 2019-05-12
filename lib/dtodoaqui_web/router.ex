@@ -54,7 +54,7 @@ defmodule DtodoaquiWeb.Router do
     resources "/profile", ProfileController, only: [:index, :create, :show, :update, :delete]
     options   "/profile", ProfileController, :options
 
-    resources "/categories", CategoryController, except: [:index, :create, :show, :update, :delete]
+    resources "/categories", CategoryController, only: [:index, :create, :show, :update, :delete]
     options   "/categories", CategoryController, :options
 
 
