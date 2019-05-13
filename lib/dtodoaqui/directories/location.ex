@@ -10,6 +10,8 @@ defmodule Dtodoaqui.Directories.Location do
     field :modified, :utc_datetime
     field :name, :string
     field :slug, :string
+    field :latitude, :decimal
+    field :longitude, :decimal
 
     timestamps()
   end
@@ -17,7 +19,7 @@ defmodule Dtodoaqui.Directories.Location do
   @doc false
   def changeset(location, attrs) do
     location
-    |> cast(attrs, [:user_id, :image_name, :name, :slug, :is_verified, :created, :modified])
-    |> validate_required([:user_id, :image_name, :name, :slug, :is_verified, :created, :modified])
+    |> cast(attrs, [:user_id, :image_name, :name, :address, :slug, :is_verified, :created, :modified])
+    |> validate_required([:user_id, :image_name, :name, :address, :slug, :is_verified,  :created, :modified])
   end
 end

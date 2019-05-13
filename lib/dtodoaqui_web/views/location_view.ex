@@ -16,7 +16,10 @@ defmodule DtodoaquiWeb.LocationView do
       image_name: location.image_name,
       name: location.name,
       slug: location.slug,
+      address: location.address,
       is_verified: location.is_verified,
+      latitude: location.latitude,
+      longitude: location.longitude,
       created: location.created,
       modified: location.modified}
   end
