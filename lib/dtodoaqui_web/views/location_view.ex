@@ -12,7 +12,7 @@ defmodule DtodoaquiWeb.LocationView do
 
   def render("location.json", %{location: location}) do
     %{id: location.id,
-      location_id: location.location_id,
+      user_id: location.location_id,
       image_name: location.image_name,
       name: location.name,
       slug: location.slug,
