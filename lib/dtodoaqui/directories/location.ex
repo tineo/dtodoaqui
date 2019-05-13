@@ -9,7 +9,9 @@ defmodule Dtodoaqui.Directories.Location do
     field :user_id, :integer
     field :modified, :utc_datetime
     field :name, :string
+    field :district, :string
     field :slug, :string
+    field :district, :string
     field :latitude, :decimal
     field :longitude, :decimal
 

@@ -7,8 +7,9 @@ defmodule Dtodoaqui.Repo.Migrations.LatLng do
       add :address, :string
       add :latitude, :double
       add :longitude, :double
-      remove :inserted_at
-      remove :updated_at
+      add :district, :string
+      #remove :inserted_at
+      #remove :updated_at
     end
 
   end
