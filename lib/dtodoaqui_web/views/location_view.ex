@@ -17,6 +17,7 @@ defmodule DtodoaquiWeb.LocationView do
       name: location.name,
       slug: location.slug,
       address: location.address,
+      district: location.district,
       is_verified: location.is_verified,
       latitude: location.latitude,
       longitude: location.longitude,
