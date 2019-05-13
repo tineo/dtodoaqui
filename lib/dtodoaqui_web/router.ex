@@ -65,6 +65,7 @@ defmodule DtodoaquiWeb.Router do
 
     get "/my_profile", ProfileController, :show_profile_jwt
     get "/my_user", UserController, :show_user_jwt
+    get "/my_locations", UserController, :show_user_jwt
   end
 
   scope "/api/swagger" do

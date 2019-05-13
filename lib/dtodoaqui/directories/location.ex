@@ -6,7 +6,7 @@ defmodule Dtodoaqui.Directories.Location do
     field :created, :utc_datetime
     field :image_name, :string
     field :is_verified, :boolean, default: false
-    field :location_id, :integer
+    field :user_id, :integer
     field :modified, :utc_datetime
     field :name, :string
     field :slug, :string
@@ -17,7 +17,7 @@ defmodule Dtodoaqui.Directories.Location do
   @doc false
   def changeset(location, attrs) do
     location
-    |> cast(attrs, [:location_id, :image_name, :name, :slug, :is_verified, :created, :modified])
-    |> validate_required([:location_id, :image_name, :name, :slug, :is_verified, :created, :modified])
+    |> cast(attrs, [:user_id, :image_name, :name, :slug, :is_verified, :created, :modified])
+    |> validate_required([:user_id, :image_name, :name, :slug, :is_verified, :created, :modified])
   end
 end
