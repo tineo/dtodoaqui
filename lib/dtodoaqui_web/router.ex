@@ -48,6 +48,8 @@ defmodule DtodoaquiWeb.Router do
 
     resources "/location", LocationController, only: [:index, :create, :show, :update, :delete]
     options   "/location", LocationController, :options
+
+    get "/search", LocationController, :search
   end
 
   scope "/api", DtodoaquiWeb do

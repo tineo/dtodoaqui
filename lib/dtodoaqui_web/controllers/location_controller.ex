@@ -40,4 +40,13 @@ defmodule DtodoaquiWeb.LocationController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def search(conn, _params) do
+    _params["keyword"] |> IO.puts
+    _params["categories"] |> IO.puts
+    _params["location"] |> IO.puts
+    _params["find_location"] |> IO.puts
+    locations = Directories.list_locations()
+    render(conn, "index.json", locations: locations)
+  end
 end
