@@ -22,13 +22,37 @@ defmodule Dtodoaqui.Accounts do
     end
   end
 
+  def token_sign_in_username(username, password) do
+    case username_password_auth(username, password) do
+      {:ok, user} ->
+        Guardian.encode_and_sign(user)
+      _ ->
+        {:error, :unauthorized}
+    end
+  end
+
   defp email_password_auth(email, password) when is_binary(email) and is_binary(password) do
     with {:ok, user} <- get_by_email(email),
     do: verify_password(password, user)
   end
 
+  defp username_password_auth(username, password) when is_binary(username) and is_binary(password) do
+    with {:ok, user} <- get_by_username(username),
+    do: verify_password(password, user)
+  end
+
   defp get_by_email(email) when is_binary(email) do
     case Repo.get_by(User, email: email) do
+      nil ->
+        dummy_checkpw()
+        {:error, "Login error."}
+      user ->
+        {:ok, user}
+    end
+  end
+
+  defp get_by_username(username) when is_binary(username) do
+    case Repo.get_by(User, username: username) do
       nil ->
         dummy_checkpw()
         {:error, "Login error."}
@@ -239,10 +263,12 @@ defmodule Dtodoaqui.Accounts do
     Profile.changeset(profile, %{})
   end
 
-  def get_profile_by!(user_id) do
+  def get_profile_by!(user_id) when is_binary(user_id) do
+
     user_id |> IO.inspect
-    query = from p in Profile, where: p.user_id == ^user_id
-    Repo.all(query)
+    #query = from p in Profile, where: p.user_id == ^user_id
+    #Repo.all(query)
+    Repo.get_by(Profile, user_id: user_id)
   end
 
 
