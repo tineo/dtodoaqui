@@ -416,8 +416,8 @@ defmodule Dtodoaqui.Directories do
   def get_locations_by!(user_id) do
 
     user_id |> IO.inspect
-    #query = from p in Profile, where: p.user_id == ^user_id
-    #Repo.all(query)
-    Repo.get_by(Location, user_id: user_id)
+    query = from l in Location, where: l.user_id == ^user_id
+    Repo.all(query)
+    #Repo.get_by(Location, user_id: user_id)
   end
 end
