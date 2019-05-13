@@ -11,7 +11,6 @@ defmodule Dtodoaqui.Directories.Location do
     field :name, :string
     field :district, :string
     field :slug, :string
-    field :district, :string
     field :latitude, :decimal
     field :longitude, :decimal
 
