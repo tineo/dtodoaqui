@@ -25,6 +25,19 @@ defmodule DtodoaquiWeb.LocationController do
     render(conn, "show.json", location: location)
   end
 
+  def show_locations_jwt(conn, _params) do
+    user = Guardian.Plug.current_resource(conn)
+    user |> IO.inspect
+    user.id |> IO.inspect
+    user_id = user.id
+    locations = Directories.get_locations_by!(user_id)
+    locations |> IO.inspect
+    case locations do
+      nil -> send_resp(conn, :no_content, "")
+      _ -> conn |> render("index.json", locations: locations)
+    end
+  end
+
   def update(conn, %{"id" => id, "location" => location_params}) do
     location = Directories.get_location!(id)
 
