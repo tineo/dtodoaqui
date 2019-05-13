@@ -35,7 +35,7 @@ defmodule DtodoaquiWeb.ProfileController do
     profile = Accounts.get_profile_by!(user_id)
     profile |> IO.inspect
     case profile do
-      [] -> send_resp(conn, :no_content, "")
+      nil -> send_resp(conn, :no_content, "")
       _ -> conn |> render("profile.json", profile: profile)
     end
   end
