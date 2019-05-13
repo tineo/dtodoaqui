@@ -263,7 +263,7 @@ defmodule Dtodoaqui.Accounts do
     Profile.changeset(profile, %{})
   end
 
-  def get_profile_by!(user_id) when is_binary(user_id) do
+  def get_profile_by!(user_id) do
 
     user_id |> IO.inspect
     #query = from p in Profile, where: p.user_id == ^user_id

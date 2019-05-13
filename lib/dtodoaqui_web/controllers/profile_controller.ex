@@ -31,14 +31,13 @@ defmodule DtodoaquiWeb.ProfileController do
     user = Guardian.Plug.current_resource(conn)
     user |> IO.inspect
     user.id |> IO.inspect
-    profile = Accounts.get_profile_by!(user.id)
+    user_id = user.id
+    profile = Accounts.get_profile_by!(user_id)
     profile |> IO.inspect
     case profile do
       [] -> send_resp(conn, :no_content, "")
       _ -> conn |> render("profile.json", profile: profile)
     end
-
-
   end
 
   def update(conn, %{"id" => id, "profile" => profile_params}) do
