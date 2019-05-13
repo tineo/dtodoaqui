@@ -46,7 +46,7 @@ defmodule DtodoaquiWeb.LocationController do
     _params["categories"] |> IO.puts
     _params["location"] |> IO.puts
     _params["find_location"] |> IO.puts
-    locations = Directories.list_locations()
+    locations = Directories.search_locations(_params)
     render(conn, "index.json", locations: locations)
   end
 end

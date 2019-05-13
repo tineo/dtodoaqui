@@ -9,6 +9,27 @@ defmodule Dtodoaqui.Directories do
   alias Dtodoaqui.Directories.Location
   alias Dtodoaqui.Directories.Category
 
+
+  @doc """
+  Returns the list of locations.
+
+  ## Examples
+
+      iex> search_locations()
+      [%Location{}, ...]
+
+  """
+  def search_locations(_params) do
+    _params["keyword"] |> IO.puts
+    _params["categories"] |> IO.puts
+    _params["location"] |> IO.puts
+    _params["find_location"] |> IO.puts
+    query = from l in Location, where: like(l.name, "%"<> _params["keyword"] <> "%")
+
+    Repo.all(query)
+
+  end
+
   @doc """
   Returns the list of locations.
 
