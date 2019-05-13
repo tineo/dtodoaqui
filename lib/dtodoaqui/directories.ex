@@ -24,7 +24,8 @@ defmodule Dtodoaqui.Directories do
     _params["categories"] |> IO.puts
     _params["location"] |> IO.puts
     _params["find_location"] |> IO.puts
-    query = from l in Location, where: like(l.name, "%"<> _params["keyword"] <> "%")
+    _key = "%"<> _params["keyword"] <> "%"
+    query = from l in Location, where: like(l.name, ^_key)
 
     Repo.all(query)
 
