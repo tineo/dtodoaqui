@@ -21,9 +21,6 @@ defmodule Dtodoaqui.Repo.Migrations.CreateListings do
       add :featured_until, :utc_datetime
       add :is_published_until, :boolean, default: false, null: false
       add :published_until, :utc_datetime
-      add :created, :utc_datetime
-      add :modified, :utc_datetime
-
       timestamps()
     end
 

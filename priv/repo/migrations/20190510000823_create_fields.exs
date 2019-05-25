@@ -6,9 +6,6 @@ defmodule Dtodoaqui.Repo.Migrations.CreateFields do
       add :listing_id, :integer
       add :data_key, :string
       add :data_value, :string
-      add :created, :utc_datetime
-      add :modified, :utc_datetime
-
       timestamps()
     end
 

@@ -13,11 +13,8 @@ defmodule Dtodoaqui.Repo.Migrations.CreateProfiles do
       add :phone, :string
       add :website, :string
       add :facebook, :string
-      add :twitter, :string
-      add :linkedin, :string
-      add :created, :utc_datetime
-      add :modified, :utc_datetime
-
+      #add :twitter, :string
+      #add :linkedin, :string
       timestamps()
     end
 

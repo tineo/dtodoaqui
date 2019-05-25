@@ -6,9 +6,6 @@ defmodule Dtodoaqui.Repo.Migrations.CreateCategories do
       add :name, :string
       add :slug, :string
       add :font_icon, :string
-      add :created, :utc_datetime
-      add :modified, :utc_datetime
-
       timestamps()
     end
 
