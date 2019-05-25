@@ -22,9 +22,8 @@ defmodule DtodoaquiWeb.ProfileView do
       phone: profile.phone,
       website: profile.website,
       facebook: profile.facebook,
-      twitter: profile.twitter,
-      linkedin: profile.linkedin,
-      created: profile.created,
-      modified: profile.modified}
+      #twitter: profile.twitter,
+      #linkedin: profile.linkedin
+    }
   end
 end

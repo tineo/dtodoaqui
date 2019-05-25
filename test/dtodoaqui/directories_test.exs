@@ -304,4 +304,136 @@ defmodule Dtodoaqui.DirectoriesTest do
       assert %Ecto.Changeset{} = Directories.change_category(category)
     end
   end
+
+  describe "reviews" do
+    alias Dtodoaqui.Directories.Review
+
+    @valid_attrs %{description: "some description", is_published: 42, listing_id: 42, name: "some name", user_id: 42}
+    @update_attrs %{description: "some updated description", is_published: 43, listing_id: 43, name: "some updated name", user_id: 43}
+    @invalid_attrs %{description: nil, is_published: nil, listing_id: nil, name: nil, user_id: nil}
+
+    def review_fixture(attrs \\ %{}) do
+      {:ok, review} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Directories.create_review()
+
+      review
+    end
+
+    test "list_reviews/0 returns all reviews" do
+      review = review_fixture()
+      assert Directories.list_reviews() == [review]
+    end
+
+    test "get_review!/1 returns the review with given id" do
+      review = review_fixture()
+      assert Directories.get_review!(review.id) == review
+    end
+
+    test "create_review/1 with valid data creates a review" do
+      assert {:ok, %Review{} = review} = Directories.create_review(@valid_attrs)
+      assert review.description == "some description"
+      assert review.is_published == 42
+      assert review.listing_id == 42
+      assert review.name == "some name"
+      assert review.user_id == 42
+    end
+
+    test "create_review/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Directories.create_review(@invalid_attrs)
+    end
+
+    test "update_review/2 with valid data updates the review" do
+      review = review_fixture()
+      assert {:ok, %Review{} = review} = Directories.update_review(review, @update_attrs)
+      assert review.description == "some updated description"
+      assert review.is_published == 43
+      assert review.listing_id == 43
+      assert review.name == "some updated name"
+      assert review.user_id == 43
+    end
+
+    test "update_review/2 with invalid data returns error changeset" do
+      review = review_fixture()
+      assert {:error, %Ecto.Changeset{}} = Directories.update_review(review, @invalid_attrs)
+      assert review == Directories.get_review!(review.id)
+    end
+
+    test "delete_review/1 deletes the review" do
+      review = review_fixture()
+      assert {:ok, %Review{}} = Directories.delete_review(review)
+      assert_raise Ecto.NoResultsError, fn -> Directories.get_review!(review.id) end
+    end
+
+    test "change_review/1 returns a review changeset" do
+      review = review_fixture()
+      assert %Ecto.Changeset{} = Directories.change_review(review)
+    end
+  end
+
+  describe "ratings" do
+    alias Dtodoaqui.Directories.Rating
+
+    @valid_attrs %{max: 42, review_id: 42, type: "some type", value: 42}
+    @update_attrs %{max: 43, review_id: 43, type: "some updated type", value: 43}
+    @invalid_attrs %{max: nil, review_id: nil, type: nil, value: nil}
+
+    def rating_fixture(attrs \\ %{}) do
+      {:ok, rating} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Directories.create_rating()
+
+      rating
+    end
+
+    test "list_ratings/0 returns all ratings" do
+      rating = rating_fixture()
+      assert Directories.list_ratings() == [rating]
+    end
+
+    test "get_rating!/1 returns the rating with given id" do
+      rating = rating_fixture()
+      assert Directories.get_rating!(rating.id) == rating
+    end
+
+    test "create_rating/1 with valid data creates a rating" do
+      assert {:ok, %Rating{} = rating} = Directories.create_rating(@valid_attrs)
+      assert rating.max == 42
+      assert rating.review_id == 42
+      assert rating.type == "some type"
+      assert rating.value == 42
+    end
+
+    test "create_rating/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Directories.create_rating(@invalid_attrs)
+    end
+
+    test "update_rating/2 with valid data updates the rating" do
+      rating = rating_fixture()
+      assert {:ok, %Rating{} = rating} = Directories.update_rating(rating, @update_attrs)
+      assert rating.max == 43
+      assert rating.review_id == 43
+      assert rating.type == "some updated type"
+      assert rating.value == 43
+    end
+
+    test "update_rating/2 with invalid data returns error changeset" do
+      rating = rating_fixture()
+      assert {:error, %Ecto.Changeset{}} = Directories.update_rating(rating, @invalid_attrs)
+      assert rating == Directories.get_rating!(rating.id)
+    end
+
+    test "delete_rating/1 deletes the rating" do
+      rating = rating_fixture()
+      assert {:ok, %Rating{}} = Directories.delete_rating(rating)
+      assert_raise Ecto.NoResultsError, fn -> Directories.get_rating!(rating.id) end
+    end
+
+    test "change_rating/1 returns a rating changeset" do
+      rating = rating_fixture()
+      assert %Ecto.Changeset{} = Directories.change_rating(rating)
+    end
+  end
 end

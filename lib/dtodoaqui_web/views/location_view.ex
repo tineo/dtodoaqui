@@ -20,8 +20,7 @@ defmodule DtodoaquiWeb.LocationView do
       district: location.district,
       is_verified: location.is_verified,
       latitude: location.latitude,
-      longitude: location.longitude,
-      created: location.created,
-      modified: location.modified}
+      longitude: location.longitude
+    }
   end
 end

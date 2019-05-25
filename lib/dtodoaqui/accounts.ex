@@ -71,15 +71,15 @@ defmodule Dtodoaqui.Accounts do
 
 
   @doc """
-  Returns the list of directory_platform_users.
+  Returns the list of users.
 
   ## Examples
 
-      iex> list_directory_platform_users()
+      iex> list_users()
       [%User{}, ...]
 
   """
-  def list_directory_platform_users do
+  def list_users do
     Repo.all(User)
   end
 

@@ -29,8 +29,7 @@ defmodule DtodoaquiWeb.ListingView do
       is_featured: listing.is_featured,
       featured_until: listing.featured_until,
       is_published_until: listing.is_published_until,
-      published_until: listing.published_until,
-      created: listing.created,
-      modified: listing.modified}
+      published_until: listing.published_until
+    }
   end
 end

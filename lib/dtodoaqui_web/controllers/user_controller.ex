@@ -90,8 +90,8 @@ defmodule DtodoaquiWeb.UserController do
   end
 
   def index(conn, _params) do
-    directory_platform_users = Accounts.list_directory_platform_users()
-    render(conn, "index.json", directory_platform_users: directory_platform_users)
+    users = Accounts.list_users()
+    render(conn, "index.json", users: users)
   end
 
   def create(conn, %{"user" => user_params}) do

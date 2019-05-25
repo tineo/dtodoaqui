@@ -12,10 +12,10 @@ defmodule DtodoaquiWeb.CategoryView do
 
   def render("category.json", %{category: category}) do
     %{id: category.id,
+      category_id: category.category_id,
       name: category.name,
       slug: category.slug,
-      font_icon: category.font_icon,
-      created: category.created,
-      modified: category.modified}
+      font_icon: category.font_icon
+    }
   end
 end

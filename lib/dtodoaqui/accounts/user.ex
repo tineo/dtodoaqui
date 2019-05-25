@@ -3,23 +3,21 @@ defmodule Dtodoaqui.Accounts.User do
   import Ecto.Changeset
   alias Dtodoaqui.Accounts.User
 
-  schema "directory_platform_users" do
-    field :confirmation_token, :string
-    field :created, :utc_datetime
+  schema "users" do
+    field :confirmation_token, :string, null: true
     field :email, :string
-    field :email_canonical, :string
+    field :email_canonical, :string, null: true
     field :enabled, :boolean, default: false
     field :is_verified, :boolean, default: false
-    field :last_login, :utc_datetime
-    field :modified, :utc_datetime
+    field :last_login, :utc_datetime, null: true
     field :password, :string
     # Virtual fields:
     field :password_confirmation, :string, virtual: true
-    field :password_requested_at, :utc_datetime
-    field :roles, :string
-    field :salt, :string
+    field :password_requested_at, :utc_datetime, null: true
+    field :roles, :string, null: true
+    field :salt, :string, null: true
     field :username, :string
-    field :username_canonical, :string
+    field :username_canonical, :string, null: true
 
     timestamps()
   end

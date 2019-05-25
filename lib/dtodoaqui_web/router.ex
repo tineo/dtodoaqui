@@ -57,6 +57,15 @@ defmodule DtodoaquiWeb.Router do
     resources "/categories", CategoryController, only: [:index, :create, :show, :update, :delete]
     options   "/categories", CategoryController, :options
 
+    resources "/reviews", ReviewController, only: [:index, :create, :show, :update, :delete]
+    options   "/reviews", ReviewController, :options
+
+    resources "/ratings", RatingController, only: [:index, :create, :show, :update, :delete]
+    options   "/ratings", RatingController, :options
+
+
+    resources "/images", ImageController, only: [:index, :create, :show, :update, :delete]
+    options   "/images", ImageController, :options
 
   end
 

@@ -14,8 +14,7 @@ defmodule DtodoaquiWeb.FieldView do
     %{id: field.id,
       listing_id: field.listing_id,
       data_key: field.data_key,
-      data_value: field.data_value,
-      created: field.created,
-      modified: field.modified}
+      data_value: field.data_value
+    }
   end
 end

@@ -12,9 +12,9 @@ defmodule DtodoaquiWeb.ImageView do
 
   def render("image.json", %{image: image}) do
     %{id: image.id,
-      listing_id: image.listing_id,
-      image_name: image.image_name,
-      created: image.created,
-      modified: image.modified}
+      entity_id: image.entity_id,
+      entity_name: image.entity_name,
+      image_name: image.image_name
+    }
   end
 end

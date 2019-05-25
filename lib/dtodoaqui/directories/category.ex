@@ -3,9 +3,8 @@ defmodule Dtodoaqui.Directories.Category do
   import Ecto.Changeset
 
   schema "categories" do
-    field :created, :utc_datetime
+    field :category_id, :integer
     field :font_icon, :string
-    field :modified, :utc_datetime
     field :name, :string
     field :slug, :string
 
