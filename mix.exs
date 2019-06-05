@@ -51,6 +51,10 @@ defmodule Dtodoaqui.MixProject do
       {:cors_plug, "~> 2.0"},
       {:phoenix_swagger, "~> 0.8"},
       {:bamboo, "~> 1.2"},
+      {:absinthe, "~> 1.4.16"},
+      {:absinthe_plug, "~> 1.4.0"},
+      {:absinthe_ecto, "~> 0.1.3"},
+      {:poison, "~> 3.1"},
       {:ex_json_schema, "~> 0.5"} # optional
     ]
   end

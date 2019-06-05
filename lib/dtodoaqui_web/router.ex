@@ -15,7 +15,16 @@ defmodule DtodoaquiWeb.Router do
     plug CORSPlug, origin: "*"
     plug :accepts, ["json"]
   end
-  
+
+  scope "/" do
+    pipe_through :api
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+            schema: DtodoaquiWeb.Schema,
+            interface: :simple,
+            context: %{pubsub: DtodoaquiWeb.Endpoint}
+  end
+
   pipeline :jwt_authenticated do
     plug Guardian.AuthPipeline
   end
@@ -67,6 +76,11 @@ defmodule DtodoaquiWeb.Router do
     resources "/images", ImageController, only: [:index, :create, :show, :update, :delete]
     options   "/images", ImageController, :options
 
+
+    #forward "/graphiql", Absinthe.Plug.GraphiQL,
+    #        schema: DtodoaquiWeb.Schema.Schema,
+    #        interface: :simple,
+    #        context: %{pubsub: DtodoaquiWeb.Endpoint}
   end
 
   scope "/api", DtodoaquiWeb do
