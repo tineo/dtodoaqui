@@ -72,9 +72,11 @@ defmodule DtodoaquiWeb.Router do
     resources "/ratings", RatingController, only: [:index, :create, :show, :update, :delete]
     options   "/ratings", RatingController, :options
 
-
     resources "/images", ImageController, only: [:index, :create, :show, :update, :delete]
     options   "/images", ImageController, :options
+
+    resources "/listings", ListingController, only: [:index, :create, :show, :update, :delete]
+    options   "/listings", ListingController, :options
 
 
     #forward "/graphiql", Absinthe.Plug.GraphiQL,
