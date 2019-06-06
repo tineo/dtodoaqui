@@ -43,7 +43,7 @@ defmodule Dtodoaqui.Accounts.User do
               |> validate_confirmation(:password) # Check that password === password_confirmation
               |> unique_constraint(:email)
               |> put_password_hash
-      _ -> user |> cast(attrs, [:is_verified, :last_login, :modified, :password_confirmation, :username])
+      _ -> user |> cast(attrs, [:is_verified, :last_login, :password_confirmation, :username])
     end
   end
 
