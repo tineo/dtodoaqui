@@ -22,7 +22,7 @@ defmodule Dtodoaqui.Accounts.Profile do
   @doc false
   def changeset(profile, attrs) do
     profile
-    |> cast(attrs, [:user_id, :avatar_name, :first_name, :last_name, :country, :address, :description, :phone, :website, :facebook, :created, :modified])
+    |> cast(attrs, [:user_id, :avatar_name, :first_name, :last_name, :country, :address, :description, :phone, :website, :facebook])
     |> validate_required([:user_id, :first_name, :last_name])
   end
 end
