@@ -3,11 +3,9 @@ defmodule Dtodoaqui.Directories.Field do
   import Ecto.Changeset
 
   schema "fields" do
-    field :created, :utc_datetime
     field :data_key, :string
     field :data_value, :string
     field :listing_id, :integer
-    field :modified, :utc_datetime
 
     timestamps()
   end

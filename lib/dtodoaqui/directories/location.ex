@@ -3,11 +3,9 @@ defmodule Dtodoaqui.Directories.Location do
   import Ecto.Changeset
 
   schema "locations" do
-    field :created, :utc_datetime
     field :image_name, :string
     field :is_verified, :boolean, default: false
     field :user_id, :integer
-    field :modified, :utc_datetime
     field :name, :string
     field :district, :string
     field :address, :string
