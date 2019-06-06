@@ -34,8 +34,9 @@ defmodule Dtodoaqui.Accounts.User do
     IO.inspect(Map.has_key?(attrs, :password_confirmation))
     IO.inspect(Map.keys(attrs))
 
-    case Map.has_key?(attrs, :password_confirmation) do
-      true -> user
+    #case Map.has_key?(attrs, :password_confirmation) do
+    #  true ->
+          user
               |> cast(attrs, [:username, :email, :password, :password_confirmation]) # Remove hash, add pw + pw confirmation
               |> validate_required([:username, :email, :password, :password_confirmation]) # Remove hash, add pw + pw confirmation
               |> validate_format(:email, ~r/@/) # Check that email is valid
@@ -43,8 +44,8 @@ defmodule Dtodoaqui.Accounts.User do
               |> validate_confirmation(:password) # Check that password === password_confirmation
               |> unique_constraint(:email)
               |> put_password_hash
-      _ -> user |> cast(attrs, [:is_verified, :last_login, :password_confirmation, :username])
-    end
+    #  _ -> user |> cast(attrs, [:is_verified, :last_login, :password_confirmation, :username])
+    #end
   end
 
   defp put_password_hash(changeset) do
