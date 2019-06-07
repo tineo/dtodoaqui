@@ -7,6 +7,7 @@ defmodule Dtodoaqui.Resources.Image do
     field :image_base64, :string, virtual: true
     field :entity_id, :integer
     field :entity_name, :string
+    field :user_id, :integer
 
     timestamps()
   end

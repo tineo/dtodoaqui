@@ -93,6 +93,7 @@ defmodule DtodoaquiWeb.Router do
     put "/my_profile", ProfileController, :update_profile_jwt
     get "/my_user", UserController, :show_user_jwt
     get "/my_locations", LocationController, :show_locations_jwt
+    post "/upload_image", ImageController, :create_image_jwt
   end
 
   scope "/api/swagger" do

@@ -20,6 +20,17 @@ defmodule DtodoaquiWeb.ImageController do
     end
   end
 
+  def create_image_jwt(conn, %{"image" => image_params}) do
+    user = Guardian.Plug.current_resource(conn)
+    profile_params = Map.put(image_params, "user_id", user.id)
+    with {:ok, %Image{} = image} <- Resources.create_image(image_params) do
+      conn
+      |> put_status(:created)
+      |> put_resp_header("location", Routes.image_path(conn, :show, image))
+      |> render("show.json", image: image)
+    end
+  end
+
   def show(conn, %{"id" => id}) do
     image = Resources.get_image!(id)
     render(conn, "show.json", image: image)
