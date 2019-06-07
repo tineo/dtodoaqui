@@ -51,7 +51,7 @@ defmodule Dtodoaqui.Resources.Image do
     #binary_to_upload(data, path)
     #File.cwd! <> "/priv/static/images" |> IO.inspect
     image
-    |> cast(attrs, [:entity_id, :entity_name])
+    |> cast(attrs, [:entity_id, :entity_name, :user_id])
     |> put_change(:image_name, image_uri <> "." <> base.ext)
     |> validate_required([:entity_id, :entity_name])
     #|> base64_to_upload(:image_base64)

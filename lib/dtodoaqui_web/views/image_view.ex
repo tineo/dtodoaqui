@@ -14,7 +14,8 @@ defmodule DtodoaquiWeb.ImageView do
     %{id: image.id,
       entity_id: image.entity_id,
       entity_name: image.entity_name,
-      image_name: image.image_name
+      image_name: image.image_name,
+      user_id: image.user_id
     }
   end
 end
