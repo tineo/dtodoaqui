@@ -6,6 +6,7 @@ defmodule Dtodoaqui.Repo.Migrations.CreateImages do
       add :entity_id, :integer
       add :entity_name, :string
       add :image_name, :string
+      add :user_id, :integer
       timestamps()
     end
 
