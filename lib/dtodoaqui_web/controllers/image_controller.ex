@@ -22,7 +22,7 @@ defmodule DtodoaquiWeb.ImageController do
 
   def create_image_jwt(conn, %{"image" => image_params}) do
     user = Guardian.Plug.current_resource(conn)
-    profile_params = Map.put(image_params, "user_id", user.id)
+    image_params = Map.put(image_params, "user_id", user.id)
     with {:ok, %Image{} = image} <- Resources.create_image(image_params) do
       conn
       |> put_status(:created)

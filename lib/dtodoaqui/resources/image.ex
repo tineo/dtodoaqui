@@ -40,7 +40,7 @@ defmodule Dtodoaqui.Resources.Image do
     #base.ext |> IO.inspect()
     image_uri = case Base.decode64(base.image) do
       {:ok, data} -> Base.decode64(base.image)
-                     image_uri = data |> binary_to_images
+                     image_uri = data |> binary_to_images(base.ext)
       _ -> "empty"
     end
     #File.write("/home/tineo/Escritorio/img.jpg", data, [:binary])
@@ -74,9 +74,9 @@ defmodule Dtodoaqui.Resources.Image do
     end
   end
 
-  defp binary_to_images(binary) do
+  defp binary_to_images(binary, ext) do
     uri =  "images/" <> Ecto.UUID.generate
-    path = File.cwd! <> "/priv/static/" <> uri
+    path = File.cwd! <> "/priv/static/" <> uri <> "." <> ext
     with {:ok, file} <- File.open(path, [:write, :binary]),
          :ok <- IO.binwrite(file, binary),
          :ok <- File.close(file) do
