@@ -41,10 +41,8 @@ defmodule DtodoaquiWeb.ProfileController do
   end
 
   def create_profile_jwt(conn, %{"profile" => profile_params}) do
-    profile_params |> IO.inspect()
     user = Guardian.Plug.current_resource(conn)
-    user |> IO.inspect
-    user.id |> IO.inspect
+    profile_params = Map.put(profile_params, "user_id", user.id)
     with {:ok, %Profile{} = profile} <- Accounts.create_profile(profile_params) do
       conn
       |> put_status(:created)
@@ -55,6 +53,16 @@ defmodule DtodoaquiWeb.ProfileController do
 
   def update(conn, %{"id" => id, "profile" => profile_params}) do
     profile = Accounts.get_profile!(id)
+
+    with {:ok, %Profile{} = profile} <- Accounts.update_profile(profile, profile_params) do
+      render(conn, "show.json", profile: profile)
+    end
+  end
+
+  def update_profile_jwt(conn, %{"profile" => profile_params}) do
+    user = Guardian.Plug.current_resource(conn)
+    profile = Accounts.get_profile_by!(user.id)
+    #profile = Accounts.get_profile!(id)
 
     with {:ok, %Profile{} = profile} <- Accounts.update_profile(profile, profile_params) do
       render(conn, "show.json", profile: profile)
