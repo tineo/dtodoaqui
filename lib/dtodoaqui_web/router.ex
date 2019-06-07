@@ -89,6 +89,7 @@ defmodule DtodoaquiWeb.Router do
     pipe_through [:api, :jwt_authenticated]
 
     get "/my_profile", ProfileController, :show_profile_jwt
+    post "/my_profile", ProfileController, :create_profile_jwt
     get "/my_user", UserController, :show_user_jwt
     get "/my_locations", LocationController, :show_locations_jwt
   end
