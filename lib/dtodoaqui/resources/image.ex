@@ -17,15 +17,31 @@ defmodule Dtodoaqui.Resources.Image do
     #IO.inspect(attrs)
     #IO.inspect(Map.fetch(attrs, "image_base64"))
     {:ok, image_base64 } = Map.fetch(attrs, "image_base64")
+    image_base64 |> IO.inspect()
+    "data:image/" <> raw = image_base64
+
+    #"" |> IO.inspect()
+    #"" |> IO.inspect()
+    #raw |> IO.inspect()
+    base = case raw do
+      "jpg;base64," <> base64 -> %{ ext: "jpg", image: base64}
+      "png;base64," <> base64 -> %{ ext: "png", image: base64}
+      "gif;base64," <> base64 -> %{ ext: "gif", image: base64}
+    end
+
+
     #IO.inspect(Map.keys(attrs))
     #IO.inspect(Map.values(attrs))
     #IO.inspect(attrs[:image_base64])
 
     #{:ok, data} = Base.decode64(image_base64)
-    image_uri = case Base.decode64(image_base64) do
-      {:ok, data} -> Base.decode64(image_base64)
+    #base |> IO.inspect()
+    #base.image |> IO.inspect()
+    #base.ext |> IO.inspect()
+    image_uri = case Base.decode64(base.image) do
+      {:ok, data} -> Base.decode64(base.image)
                      image_uri = data |> binary_to_images
-      _ -> ""
+      _ -> "empty"
     end
     #File.write("/home/tineo/Escritorio/img.jpg", data, [:binary])
 
@@ -35,9 +51,9 @@ defmodule Dtodoaqui.Resources.Image do
     #binary_to_upload(data, path)
     #File.cwd! <> "/priv/static/images" |> IO.inspect
     image
-    |> cast(attrs, [:listing_id, :image_name])
-    |> put_change(:image_name, image_uri)
-    |> validate_required([:listing_id, :image_name])
+    |> cast(attrs, [:entity_id, :entity_name])
+    |> put_change(:image_name, image_uri <> "." <> base.ext)
+    |> validate_required([:entity_id, :entity_name])
     #|> base64_to_upload(:image_base64)
   end
 
