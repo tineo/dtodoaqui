@@ -40,4 +40,13 @@ defmodule DtodoaquiWeb.ListingController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def search(conn, _params) do
+    _params["keyword"] |> IO.puts
+    _params["categories"] |> IO.puts
+    _params["location"] |> IO.puts
+    _params["find_location"] |> IO.puts
+    listings = Directories.search_listings(_params)
+    render(conn, "index.json", listings: listings)
+  end
 end

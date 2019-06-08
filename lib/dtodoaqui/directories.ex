@@ -7,6 +7,7 @@ defmodule Dtodoaqui.Directories do
   alias Dtodoaqui.Repo
 
   alias Dtodoaqui.Directories.Location
+  alias Dtodoaqui.Directories.Listing
   alias Dtodoaqui.Directories.Category
 
 
@@ -19,13 +20,13 @@ defmodule Dtodoaqui.Directories do
       [%Location{}, ...]
 
   """
-  def search_locations(_params) do
+  def search_listings(_params) do
     _params["keyword"] |> IO.puts
     _params["categories"] |> IO.puts
     _params["location"] |> IO.puts
     _params["find_location"] |> IO.puts
     _key = "%"<> _params["keyword"] <> "%"
-    query = from l in Location, where: like(l.name, ^_key)
+    query = from l in Listing, where: like(l.name, ^_key)
 
     Repo.all(query)
 
