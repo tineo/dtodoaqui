@@ -42,7 +42,12 @@ defmodule DtodoaquiWeb.ListingController do
   end
 
   def search(conn, _params) do
-    _params|> IO.puts
+    _params |> IO.puts
+    _params["keyword"] = case Map.has_key?(_params,"keyword") do
+      true -> _params["keyword"]
+      _ -> ""
+    end
+    _params["keyword"] |> IO.puts
     _params["categories"] |> IO.puts
     _params["location"] |> IO.puts
     _params["find_location"] |> IO.puts
