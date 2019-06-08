@@ -14,7 +14,7 @@ defmodule Dtodoaqui.Directories.Category do
   @doc false
   def changeset(category, attrs) do
     category
-    |> cast(attrs, [:name, :slug, :font_icon, :created, :modified])
-    |> validate_required([:name, :slug, :font_icon, :created, :modified])
+    |> cast(attrs, [:name, :slug, :font_icon])
+    |> validate_required([:name, :slug])
   end
 end
