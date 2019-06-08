@@ -11,7 +11,7 @@ defmodule DtodoaquiWeb.LocationController do
     render(conn, "index.json", locations: locations)
   end
 
-  def create(conn, %{"location" => location_params}) do
+  def create(conn, %{"locations" => location_params}) do
     with {:ok, %Location{} = location} <- Directories.create_location(location_params) do
       conn
       |> put_status(:created)

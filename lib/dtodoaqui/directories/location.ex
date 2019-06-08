@@ -19,7 +19,7 @@ defmodule Dtodoaqui.Directories.Location do
   @doc false
   def changeset(location, attrs) do
     location
-    |> cast(attrs, [:user_id, :image_name, :name, :address, :slug, :is_verified, :created, :modified, :district, :latitude, :longitude])
-    |> validate_required([:user_id, :image_name, :name, :address, :slug, :is_verified,  :created, :modified])
+    |> cast(attrs, [:user_id, :image_name, :name, :address, :slug, :is_verified, :district, :latitude, :longitude])
+    |> validate_required([:image_name, :name, :latitude, :longitude, :slug])
   end
 end
