@@ -10,8 +10,8 @@ defmodule Dtodoaqui.Repo.Migrations.CreateLocations do
       add :user_id, :integer
       add :district, :string
       add :address, :string
-      add :latitude, :decimal
-      add :longitude, :decimal
+      add :latitude, :decimal, precision: 9, scale: 7
+      add :longitude, :decimal, precision: 9, scale: 7
       timestamps()
     end
 
