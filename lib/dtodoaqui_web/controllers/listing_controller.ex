@@ -42,7 +42,7 @@ defmodule DtodoaquiWeb.ListingController do
   end
 
   def search(conn, _params) do
-    _params["keyword"] |> IO.puts
+    _params|> IO.puts
     _params["categories"] |> IO.puts
     _params["location"] |> IO.puts
     _params["find_location"] |> IO.puts
