@@ -42,7 +42,7 @@ defmodule DtodoaquiWeb.ListingController do
   end
 
   def search(conn, _params) do
-    _params |> IO.puts
+    _params |> IO.inspect()
     keyword = case Map.has_key?(_params,"keyword") do
       true -> _params["keyword"]
       _ -> ""
