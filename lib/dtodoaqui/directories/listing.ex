@@ -28,12 +28,12 @@ defmodule Dtodoaqui.Directories.Listing do
   @doc false
   def changeset(listing, attrs) do
     listing
-    |> cast(attrs, [:user_id, :category_id, :location_id, :name, :type, :slug, :description, :address, :price, :latitude, :longitude, :video_youtube, :opening_hours, :is_verified, :is_featured, :featured_until, :is_published_until, :published_until, :created, :modified])
+    |> cast(attrs, [:user_id, :category_id, :location_id, :name, :type, :slug, :description, :address, :price, :latitude, :longitude, :video_youtube, :opening_hours, :is_verified, :is_featured, :featured_until, :is_published_until, :published_until])
     |> validate_required([
       :user_id,
       :category_id,
       :location_id,
-      :name, :type,
+      :name,
       :slug,
       :description,
       :address,

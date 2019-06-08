@@ -11,11 +11,11 @@ defmodule DtodoaquiWeb.ListingController do
     render(conn, "index.json", listings: listings)
   end
 
-  def create(conn, %{"listing" => listing_params}) do
+  def create(conn, %{"listings" => listing_params}) do
     with {:ok, %Listing{} = listing} <- Directories.create_listing(listing_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", Routes.listing_path(conn, :show, listing))
+      |> put_resp_header("listing", Routes.listing_path(conn, :show, listing))
       |> render("show.json", listing: listing)
     end
   end
