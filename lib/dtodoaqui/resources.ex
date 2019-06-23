@@ -21,6 +21,12 @@ defmodule Dtodoaqui.Resources do
     Repo.all(Image)
   end
 
+  def list_images_by_listing!(id) do
+    query = from u in Image,
+                 where: u.entity_id = ^id and u.entity_name = "listing"
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single image.
 

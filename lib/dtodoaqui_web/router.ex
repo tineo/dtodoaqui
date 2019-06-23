@@ -78,6 +78,8 @@ defmodule DtodoaquiWeb.Router do
     resources "/listings", ListingController, only: [:index, :create, :show, :update, :delete]
     options   "/listings", ListingController, :options
 
+    get "/listings/:id/images", ImageController, :get_images
+
 
     #forward "/graphiql", Absinthe.Plug.GraphiQL,
     #        schema: DtodoaquiWeb.Schema.Schema,

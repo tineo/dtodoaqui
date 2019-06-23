@@ -51,4 +51,9 @@ defmodule DtodoaquiWeb.ImageController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def get_images(conn, %{"id" => id} ) do
+    images = Resources.list_images_by_listing!(id)
+    render(conn, "index.json", images: images)
+  end
 end
