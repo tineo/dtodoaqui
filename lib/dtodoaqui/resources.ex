@@ -23,7 +23,7 @@ defmodule Dtodoaqui.Resources do
 
   def list_images_by_listing!(id) do
     query = from u in Image,
-                 where: u.entity_id = ^id and u.entity_name = "listing"
+                 where: u.entity_id == ^id and u.entity_name == "listing"
     Repo.all(query)
   end
 
