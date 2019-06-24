@@ -79,6 +79,7 @@ defmodule DtodoaquiWeb.Router do
     options   "/listings", ListingController, :options
 
     get "/listings/:id/images", ImageController, :get_images
+    get "/listings/:id/reviews", ReviewController, :get_reviews
 
 
     #forward "/graphiql", Absinthe.Plug.GraphiQL,

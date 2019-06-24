@@ -437,6 +437,13 @@ defmodule Dtodoaqui.Directories do
     Repo.all(Review)
   end
 
+
+  def list_reviews_by_listing!(id) do
+    query = from u in Review,
+                 where: u.entity_id == ^id and u.entity_name == "review"
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single review.
 

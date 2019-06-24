@@ -40,4 +40,9 @@ defmodule DtodoaquiWeb.ReviewController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def get_reviews(conn, %{"id" => id} ) do
+    reviews = Directories.list_reviews_by_listing!(id)
+    render(conn, "index.json", reviews: reviews)
+  end
 end
