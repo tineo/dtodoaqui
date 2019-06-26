@@ -83,7 +83,7 @@ defmodule DtodoaquiWeb.Router do
     get "/listings/:id/ratings", RatingController, :get_ratings
     get "/listings/:id/rating", RatingController, :get_rating_total
 
-    get "/profile/:user_id/detail", ProfileController, :get_details
+    get "/profile/:user_id/detail", ProfileController, :show_detail
 
     resources "/claims", ClaimController
     resources "/reports", ReportController
