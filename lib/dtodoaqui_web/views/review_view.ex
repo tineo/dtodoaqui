@@ -16,6 +16,7 @@ defmodule DtodoaquiWeb.ReviewView do
       listing_id: review.listing_id,
       name: review.name,
       description: review.description,
+      username: review.username,
       is_published: review.is_published}
   end
 end

@@ -8,6 +8,7 @@ defmodule Dtodoaqui.Directories.Review do
     field :listing_id, :integer
     field :name, :string
     field :user_id, :integer
+    field :username, :string, virtual: true
 
     timestamps()
   end

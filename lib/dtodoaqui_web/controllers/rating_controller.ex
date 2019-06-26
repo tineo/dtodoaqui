@@ -7,6 +7,7 @@ defmodule DtodoaquiWeb.RatingController do
   action_fallback DtodoaquiWeb.FallbackController
 
   def index(conn, _params) do
+    Directories.get_rating_by_listing!(1) |> IO.inspect()
     ratings = Directories.list_ratings()
     render(conn, "index.json", ratings: ratings)
   end

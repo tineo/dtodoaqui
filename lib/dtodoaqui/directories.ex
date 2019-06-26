@@ -9,6 +9,7 @@ defmodule Dtodoaqui.Directories do
   alias Dtodoaqui.Directories.Location
   alias Dtodoaqui.Directories.Listing
   alias Dtodoaqui.Directories.Category
+  alias Dtodoaqui.Accounts.User
 
 
   @doc """
@@ -483,14 +484,21 @@ defmodule Dtodoaqui.Directories do
 
   """
   def list_reviews do
-    Repo.all(Review)
+    query = from r in Review,
+                 join: u in User,
+                 on: u.id == r.user_id,
+                 select: {r, u.username}
+    Repo.all(query) |> Enum.map( fn { review, username } -> review |> Map.put(:username,username) end)
   end
 
 
-  def list_reviews_by_listing!(id) do
-    query = from u in Review,
-                 where: u.listing_id == ^id
-    Repo.all(query)
+  def list_reviews_by_listing!(listing_id) do
+    query = from r in Review,
+                 join: u in User,
+                 on: u.id == r.user_id,
+                 where: r.listing_id == ^listing_id,
+                 select: {r, u.username}
+    Repo.all(query) |> Enum.map( fn { review, username } -> review |> Map.put(:username, username) end)
   end
 
   @doc """
@@ -507,7 +515,15 @@ defmodule Dtodoaqui.Directories do
       ** (Ecto.NoResultsError)
 
   """
-  def get_review!(id), do: Repo.get!(Review, id)
+  def get_review!(id) do
+    query = from r in Review,
+                 join: u in User,
+                 on: u.id == r.user_id,
+                 where: r.id == ^id,
+                 select: {r, u.username}
+    { review, username } = Repo.one(query)
+    review |> Map.put(:username, username)
+  end
 
   @doc """
   Creates a review.
@@ -586,7 +602,11 @@ defmodule Dtodoaqui.Directories do
 
   """
   def list_ratings do
-    Repo.all(Rating)
+    query = from r in Rating,
+                 join: u in User,
+                 select: {r, u.username}
+    Repo.all(query) |> Enum.map( fn { ratings, username } -> ratings |> Map.put(:username, username) end)
+
   end
 
   @doc """
@@ -603,7 +623,23 @@ defmodule Dtodoaqui.Directories do
       ** (Ecto.NoResultsError)
 
   """
-  def get_rating!(id), do: Repo.get!(Rating, id)
+  def get_rating!(id) do
+    query = from r in Rating,
+                 join: u in User,
+                 on: u.id == r.user_id,
+                 where: r.id == ^id,
+                 select: {r, u.username}
+    { rating, username } = Repo.one(query)
+    rating |> Map.put(:username, username)
+  end
+
+  def get_rating_by_listing!(listing_id) do
+    query = from r in Rating,
+                 where: r.type == "listing" and r.review_id == ^listing_id,
+                 select: { sum(r.value), sum(r.max) }
+    Repo.all(query) |> IO.inspect()
+    #|> Enum.map( fn { review, username } -> review |> Map.put(:username, username) end)
+  end
 
   @doc """
   Creates a rating.
