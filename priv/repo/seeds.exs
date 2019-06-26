@@ -69,3 +69,23 @@ Dtodoaqui.Repo.insert!(
     latitude: -12.0552477,
     longitude: -77.0803283
   })
+
+
+Dtodoaqui.Repo.insert!(
+  %Dtodoaqui.Directories.Category{
+    name: "Restaurants",
+    slug: "restaurants",
+    font_icon: "",
+  })
+Dtodoaqui.Repo.insert!(
+  %Dtodoaqui.Directories.Category{
+    name: "Comida Rapida",
+    slug: "comida_rapida",
+    font_icon: "",
+  })
+Dtodoaqui.Repo.insert!(
+  %Dtodoaqui.Directories.Category{
+    name: "Hoteles",
+    slug: "hoteles",
+    font_icon: "",
+  })
