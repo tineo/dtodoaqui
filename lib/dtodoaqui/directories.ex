@@ -705,4 +705,196 @@ defmodule Dtodoaqui.Directories do
   def change_rating(%Rating{} = rating) do
     Rating.changeset(rating, %{})
   end
+
+  alias Dtodoaqui.Directories.Report
+
+  @doc """
+  Returns the list of reports.
+
+  ## Examples
+
+      iex> list_reports()
+      [%Report{}, ...]
+
+  """
+  def list_reports do
+    Repo.all(Report)
+  end
+
+  @doc """
+  Gets a single report.
+
+  Raises `Ecto.NoResultsError` if the Report does not exist.
+
+  ## Examples
+
+      iex> get_report!(123)
+      %Report{}
+
+      iex> get_report!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_report!(id), do: Repo.get!(Report, id)
+
+  @doc """
+  Creates a report.
+
+  ## Examples
+
+      iex> create_report(%{field: value})
+      {:ok, %Report{}}
+
+      iex> create_report(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_report(attrs \\ %{}) do
+    %Report{}
+    |> Report.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a report.
+
+  ## Examples
+
+      iex> update_report(report, %{field: new_value})
+      {:ok, %Report{}}
+
+      iex> update_report(report, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_report(%Report{} = report, attrs) do
+    report
+    |> Report.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Report.
+
+  ## Examples
+
+      iex> delete_report(report)
+      {:ok, %Report{}}
+
+      iex> delete_report(report)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_report(%Report{} = report) do
+    Repo.delete(report)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking report changes.
+
+  ## Examples
+
+      iex> change_report(report)
+      %Ecto.Changeset{source: %Report{}}
+
+  """
+  def change_report(%Report{} = report) do
+    Report.changeset(report, %{})
+  end
+
+  alias Dtodoaqui.Directories.Claim
+
+  @doc """
+  Returns the list of claims.
+
+  ## Examples
+
+      iex> list_claims()
+      [%Claim{}, ...]
+
+  """
+  def list_claims do
+    Repo.all(Claim)
+  end
+
+  @doc """
+  Gets a single claim.
+
+  Raises `Ecto.NoResultsError` if the Claim does not exist.
+
+  ## Examples
+
+      iex> get_claim!(123)
+      %Claim{}
+
+      iex> get_claim!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_claim!(id), do: Repo.get!(Claim, id)
+
+  @doc """
+  Creates a claim.
+
+  ## Examples
+
+      iex> create_claim(%{field: value})
+      {:ok, %Claim{}}
+
+      iex> create_claim(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_claim(attrs \\ %{}) do
+    %Claim{}
+    |> Claim.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a claim.
+
+  ## Examples
+
+      iex> update_claim(claim, %{field: new_value})
+      {:ok, %Claim{}}
+
+      iex> update_claim(claim, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_claim(%Claim{} = claim, attrs) do
+    claim
+    |> Claim.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Claim.
+
+  ## Examples
+
+      iex> delete_claim(claim)
+      {:ok, %Claim{}}
+
+      iex> delete_claim(claim)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_claim(%Claim{} = claim) do
+    Repo.delete(claim)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking claim changes.
+
+  ## Examples
+
+      iex> change_claim(claim)
+      %Ecto.Changeset{source: %Claim{}}
+
+  """
+  def change_claim(%Claim{} = claim) do
+    Claim.changeset(claim, %{})
+  end
 end

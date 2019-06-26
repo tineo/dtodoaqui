@@ -436,4 +436,134 @@ defmodule Dtodoaqui.DirectoriesTest do
       assert %Ecto.Changeset{} = Directories.change_rating(rating)
     end
   end
+
+  describe "reports" do
+    alias Dtodoaqui.Directories.Report
+
+    @valid_attrs %{is_approved: true, listing_id: 42, message: "some message", user_id: 42}
+    @update_attrs %{is_approved: false, listing_id: 43, message: "some updated message", user_id: 43}
+    @invalid_attrs %{is_approved: nil, listing_id: nil, message: nil, user_id: nil}
+
+    def report_fixture(attrs \\ %{}) do
+      {:ok, report} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Directories.create_report()
+
+      report
+    end
+
+    test "list_reports/0 returns all reports" do
+      report = report_fixture()
+      assert Directories.list_reports() == [report]
+    end
+
+    test "get_report!/1 returns the report with given id" do
+      report = report_fixture()
+      assert Directories.get_report!(report.id) == report
+    end
+
+    test "create_report/1 with valid data creates a report" do
+      assert {:ok, %Report{} = report} = Directories.create_report(@valid_attrs)
+      assert report.is_approved == true
+      assert report.listing_id == 42
+      assert report.message == "some message"
+      assert report.user_id == 42
+    end
+
+    test "create_report/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Directories.create_report(@invalid_attrs)
+    end
+
+    test "update_report/2 with valid data updates the report" do
+      report = report_fixture()
+      assert {:ok, %Report{} = report} = Directories.update_report(report, @update_attrs)
+      assert report.is_approved == false
+      assert report.listing_id == 43
+      assert report.message == "some updated message"
+      assert report.user_id == 43
+    end
+
+    test "update_report/2 with invalid data returns error changeset" do
+      report = report_fixture()
+      assert {:error, %Ecto.Changeset{}} = Directories.update_report(report, @invalid_attrs)
+      assert report == Directories.get_report!(report.id)
+    end
+
+    test "delete_report/1 deletes the report" do
+      report = report_fixture()
+      assert {:ok, %Report{}} = Directories.delete_report(report)
+      assert_raise Ecto.NoResultsError, fn -> Directories.get_report!(report.id) end
+    end
+
+    test "change_report/1 returns a report changeset" do
+      report = report_fixture()
+      assert %Ecto.Changeset{} = Directories.change_report(report)
+    end
+  end
+
+  describe "claims" do
+    alias Dtodoaqui.Directories.Claim
+
+    @valid_attrs %{is_approved: true, listing_id: 42, message: "some message", user_id: 42}
+    @update_attrs %{is_approved: false, listing_id: 43, message: "some updated message", user_id: 43}
+    @invalid_attrs %{is_approved: nil, listing_id: nil, message: nil, user_id: nil}
+
+    def claim_fixture(attrs \\ %{}) do
+      {:ok, claim} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Directories.create_claim()
+
+      claim
+    end
+
+    test "list_claims/0 returns all claims" do
+      claim = claim_fixture()
+      assert Directories.list_claims() == [claim]
+    end
+
+    test "get_claim!/1 returns the claim with given id" do
+      claim = claim_fixture()
+      assert Directories.get_claim!(claim.id) == claim
+    end
+
+    test "create_claim/1 with valid data creates a claim" do
+      assert {:ok, %Claim{} = claim} = Directories.create_claim(@valid_attrs)
+      assert claim.is_approved == true
+      assert claim.listing_id == 42
+      assert claim.message == "some message"
+      assert claim.user_id == 42
+    end
+
+    test "create_claim/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Directories.create_claim(@invalid_attrs)
+    end
+
+    test "update_claim/2 with valid data updates the claim" do
+      claim = claim_fixture()
+      assert {:ok, %Claim{} = claim} = Directories.update_claim(claim, @update_attrs)
+      assert claim.is_approved == false
+      assert claim.listing_id == 43
+      assert claim.message == "some updated message"
+      assert claim.user_id == 43
+    end
+
+    test "update_claim/2 with invalid data returns error changeset" do
+      claim = claim_fixture()
+      assert {:error, %Ecto.Changeset{}} = Directories.update_claim(claim, @invalid_attrs)
+      assert claim == Directories.get_claim!(claim.id)
+    end
+
+    test "delete_claim/1 deletes the claim" do
+      claim = claim_fixture()
+      assert {:ok, %Claim{}} = Directories.delete_claim(claim)
+      assert_raise Ecto.NoResultsError, fn -> Directories.get_claim!(claim.id) end
+    end
+
+    test "change_claim/1 returns a claim changeset" do
+      claim = claim_fixture()
+      assert %Ecto.Changeset{} = Directories.change_claim(claim)
+    end
+  end
 end
