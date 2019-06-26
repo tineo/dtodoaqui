@@ -440,7 +440,7 @@ defmodule Dtodoaqui.Directories do
 
   def list_reviews_by_listing!(id) do
     query = from u in Review,
-                 where: u.entity_id == ^id and u.entity_name == "review"
+                 where: u.listing_id == ^id
     Repo.all(query)
   end
 
