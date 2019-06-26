@@ -25,8 +25,57 @@ defmodule Dtodoaqui.Directories do
     _params["categories"] |> IO.puts
     _params["location"] |> IO.puts
     _params["find_location"] |> IO.puts
-    _key = "%"<> _params["keyword"] <> "%"
-    query = from l in Listing, where: like(l.name, ^_key)
+
+    _key = case _params["keyword"] do
+                  "" -> nil
+                  _ ->  "%"<> _params["keyword"] <> "%"
+                end
+
+    _category_id = case _params["categories"] do
+                  "" -> nil
+                  _ -> _params["categories"]
+                end
+
+    _location_id = case _params["location"] do
+                     "" -> nil
+                     _ -> _params["location"]
+                   end
+
+    _find_location = case _params["find_location"] do
+                      "" -> nil
+                      nil -> nil
+                      _ -> "%"<> _params["find_location"] <> "%"
+                      end
+
+    query = from l in Listing
+
+    query = if is_nil(_key) do
+              query
+            else
+              from l in query, where: like(l.name, ^_key) or like(l.description, ^_key) or like(l.address, ^_key)
+            end
+
+
+    query = if is_nil(_category_id) do
+              query
+            else
+              from l in query, where: l.category_id == ^_category_id
+            end
+
+    query = if is_nil(_location_id) do
+              query
+            else
+              from l in query, where: l.location_id == ^_location_id
+            end
+
+    query = if is_nil(_find_location) do
+              query
+            else
+              from l in query,
+              join: lc in Location,
+              on: lc.id == l.location_id,
+              where: like(lc.name, ^_find_location)
+            end
 
     Repo.all(query)
 
