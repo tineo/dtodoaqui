@@ -918,17 +918,17 @@ defmodule Dtodoaqui.Directories do
 
   def get_details!(user_id) do
     query = from r in Rating,
-                 where: r.user_id == user_id,
+                 where: r.user_id ==  ^user_id,
                  select:  count(r.id)
     num1 = Repo.one(query)
 
     query = from r in Listing,
-                 where: r.user_id == user_id,
+                 where: r.user_id ==  ^user_id,
                  select:  count(r.id)
     num2 = Repo.one(query)
 
     query = from r in Review,
-                 where: r.user_id == user_id,
+                 where: r.user_id ==  ^user_id,
                  select:  count(r.id)
     num3 = Repo.one(query)
 
