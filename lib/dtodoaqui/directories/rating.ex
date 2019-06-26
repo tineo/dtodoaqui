@@ -15,7 +15,7 @@ defmodule Dtodoaqui.Directories.Rating do
   @doc false
   def changeset(rating, attrs) do
     rating
-    |> cast(attrs, [:review_id, :type, :value, :max])
+    |> cast(attrs, [:review_id, :type, :value, :max, :user_id])
     |> validate_required([:review_id, :type, :value, :max])
   end
 end
