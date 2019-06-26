@@ -37,7 +37,7 @@ defmodule Dtodoaqui.Accounts.User do
     #case Map.has_key?(attrs, :password_confirmation) do
     #  true ->
           user
-              |> cast(attrs, [:username, :email, :password, :password_confirmation]) # Remove hash, add pw + pw confirmation
+              |> cast(attrs, [:username, :email, :password, :password_confirmation, :roles]) # Remove hash, add pw + pw confirmation
               |> validate_required([:username, :email, :password, :password_confirmation]) # Remove hash, add pw + pw confirmation
               |> validate_format(:email, ~r/@/) # Check that email is valid
               |> validate_length(:password, min: 6) # Check that password length is >= 8
