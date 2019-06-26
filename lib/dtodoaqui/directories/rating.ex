@@ -7,6 +7,7 @@ defmodule Dtodoaqui.Directories.Rating do
     field :review_id, :integer
     field :type, :string
     field :value, :integer
+    field :user_id, :integer
 
     timestamps()
   end

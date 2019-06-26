@@ -632,6 +632,13 @@ defmodule Dtodoaqui.Directories do
     rating |> Map.put(:username, username)
   end
 
+  def get_ratings_by_listing!(listing_id) do
+    query = from r in Rating,
+            where:  r.review_id == ^listing_id
+    ratings = Repo.all(query) |> IO.inspect()
+
+    #|> Enum.map( fn { review, username } -> review |> Map.put(:username, username) end)
+  end
   def get_rating_by_listing!(listing_id) do
     query = from r in Rating,
                  where: r.type == "listing" and r.review_id == ^listing_id,
@@ -640,8 +647,8 @@ defmodule Dtodoaqui.Directories do
     rating = case y do
       nil -> 0
       0 -> 0
-      _ -> 0
-      1 -> x/y
+      %Decimal{} -> Decimal.div(x,y)
+      _ -> Decimal.new(0.0)
     end
     rating |> IO.inspect()
     #|> Enum.map( fn { review, username } -> review |> Map.put(:username, username) end)

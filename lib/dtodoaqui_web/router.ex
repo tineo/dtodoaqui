@@ -80,6 +80,8 @@ defmodule DtodoaquiWeb.Router do
 
     get "/listings/:id/images", ImageController, :get_images
     get "/listings/:id/reviews", ReviewController, :get_reviews
+    get "/listings/:id/ratings", RatingController, :get_ratings
+    get "/listings/:id/rating", RatingController, :get_rating_total
 
     resources "/claims", ClaimController
     resources "/reports", ReportController

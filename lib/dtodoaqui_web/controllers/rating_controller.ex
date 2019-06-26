@@ -41,8 +41,14 @@ defmodule DtodoaquiWeb.RatingController do
     end
   end
 
+  def get_ratings(conn, %{"id" => id} ) do
+    ratings = Directories.get_ratings_by_listing!(id)
+    render(conn, "index.json", ratings: ratings)
+  end
+
   def get_rating_total(conn, %{"id" => id}) do
-    rating = Directories.get_rating_by_listing!(id)
+    sum = Directories.get_rating_by_listing!(id)
+    render(conn, "sum.json", sum: sum)
 
   end
 end

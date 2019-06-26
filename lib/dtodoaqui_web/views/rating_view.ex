@@ -17,4 +17,9 @@ defmodule DtodoaquiWeb.RatingView do
       value: rating.value,
       max: rating.max}
   end
+
+  def render("sum.json", %{sum: sum}) do
+    %{ sum: sum }
+  end
+
 end

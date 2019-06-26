@@ -7,6 +7,7 @@ defmodule Dtodoaqui.Repo.Migrations.CreateRatings do
       add :type, :string
       add :value, :integer
       add :max, :integer
+      add :user_id, :integer
 
       timestamps()
     end
