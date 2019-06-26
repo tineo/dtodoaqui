@@ -24,6 +24,7 @@ defmodule Dtodoaqui.Resources.Image do
     #"" |> IO.inspect()
     #raw |> IO.inspect()
     base = case raw do
+      "jpeg;base64," <> base64 -> %{ ext: "jpg", image: base64}
       "jpg;base64," <> base64 -> %{ ext: "jpg", image: base64}
       "png;base64," <> base64 -> %{ ext: "png", image: base64}
       "gif;base64," <> base64 -> %{ ext: "gif", image: base64}
