@@ -26,4 +26,10 @@ defmodule DtodoaquiWeb.ProfileView do
       #linkedin: profile.linkedin
     }
   end
+
+  def render("detail.json", %{detail: detail}) do
+    %{ratings: detail.ratings,
+      reviews: detail.reviews,
+      listings: detail.listings}
+  end
 end

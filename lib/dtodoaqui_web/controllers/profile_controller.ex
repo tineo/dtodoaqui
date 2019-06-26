@@ -1,6 +1,7 @@
 defmodule DtodoaquiWeb.ProfileController do
   use DtodoaquiWeb, :controller
 
+  alias Dtodoaqui.Directories
   alias Dtodoaqui.Accounts
   alias Dtodoaqui.Accounts.Profile
 
@@ -38,6 +39,12 @@ defmodule DtodoaquiWeb.ProfileController do
       nil -> send_resp(conn, :no_content, "")
       _ -> conn |> render("profile.json", profile: profile)
     end
+  end
+
+  def show_detail(conn, %{"user_id" => user_id}) do
+    detail = Directories.get_details!(user_id)
+
+    render(conn, "detail.json", detail: detail)
   end
 
   def create_profile_jwt(conn, %{"profile" => profile_params}) do
