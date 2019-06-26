@@ -42,7 +42,7 @@ defmodule DtodoaquiWeb.Endpoint do
     key: "_dtodoaqui_key",
     signing_salt: "cpvCUUd1"
     
-  plug CORSPlug
+  plug CORSPlug, origin: "*"
   plug DtodoaquiWeb.Router
   
 end

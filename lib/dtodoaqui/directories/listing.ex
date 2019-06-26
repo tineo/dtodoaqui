@@ -21,6 +21,8 @@ defmodule Dtodoaqui.Directories.Listing do
     field :type, :string
     field :user_id, :integer
     field :video_youtube, :string
+    field :rating, :float, virtual: true, default: 0.0
+
 
     timestamps()
   end

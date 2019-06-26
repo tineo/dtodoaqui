@@ -52,7 +52,7 @@ defmodule DtodoaquiWeb.ListingController do
     _params["categories"] |> IO.puts
     _params["location"] |> IO.puts
     _params["find_location"] |> IO.puts
-    listings = Directories.search_listings(_params)
+    listings = Directories.search_listings(_params) |> IO.inspect()
     render(conn, "index.json", listings: listings)
   end
 end

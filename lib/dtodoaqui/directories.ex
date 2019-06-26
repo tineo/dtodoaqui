@@ -78,8 +78,7 @@ defmodule Dtodoaqui.Directories do
               where: like(lc.name, ^_find_location)
             end
 
-    Repo.all(query)
-
+    Repo.all(query) |> Enum.map( fn listing -> listing |> Map.put(:rating, get_rating_by_listing!(listing.id)) end)
   end
 
   @doc """
@@ -637,7 +636,13 @@ defmodule Dtodoaqui.Directories do
     query = from r in Rating,
                  where: r.type == "listing" and r.review_id == ^listing_id,
                  select: { sum(r.value), sum(r.max) }
-    Repo.all(query) |> IO.inspect()
+    { x, y } = Repo.one(query)
+    rating = case y do
+      nil -> 0
+      0 -> 0
+      1 -> x/y
+    end
+    rating |> IO.inspect()
     #|> Enum.map( fn { review, username } -> review |> Map.put(:username, username) end)
   end
 

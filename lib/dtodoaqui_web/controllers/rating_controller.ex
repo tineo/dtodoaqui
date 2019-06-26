@@ -7,7 +7,6 @@ defmodule DtodoaquiWeb.RatingController do
   action_fallback DtodoaquiWeb.FallbackController
 
   def index(conn, _params) do
-    Directories.get_rating_by_listing!(1) |> IO.inspect()
     ratings = Directories.list_ratings()
     render(conn, "index.json", ratings: ratings)
   end
@@ -40,5 +39,10 @@ defmodule DtodoaquiWeb.RatingController do
     with {:ok, %Rating{}} <- Directories.delete_rating(rating) do
       send_resp(conn, :no_content, "")
     end
+  end
+
+  def get_rating_total(conn, %{"id" => id}) do
+    rating = Directories.get_rating_by_listing!(id)
+
   end
 end
