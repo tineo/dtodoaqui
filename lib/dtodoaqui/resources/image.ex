@@ -19,7 +19,7 @@ defmodule Dtodoaqui.Resources.Image do
     {:ok, image_base64 } = Map.fetch(attrs, "image_base64")
     image_base64 |> IO.inspect()
     "data:image/" <> raw = image_base64
-
+    #data:image/jpeg;base64
     #"" |> IO.inspect()
     #"" |> IO.inspect()
     #raw |> IO.inspect()
