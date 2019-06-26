@@ -27,6 +27,12 @@ defmodule Dtodoaqui.Resources do
     Repo.all(query)
   end
 
+  def list_images_by_review!(id) do
+    query = from u in Image,
+                 where: u.entity_id == ^id and u.entity_name == "review"
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single image.
 

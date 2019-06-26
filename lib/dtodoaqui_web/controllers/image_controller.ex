@@ -56,4 +56,9 @@ defmodule DtodoaquiWeb.ImageController do
     images = Resources.list_images_by_listing!(id)
     render(conn, "index.json", images: images)
   end
+
+  def get_images_reviews(conn, %{"id" => id} ) do
+    images = Resources.list_images_by_review!(id)
+    render(conn, "index.json", images: images)
+  end
 end
