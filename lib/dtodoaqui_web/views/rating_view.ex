@@ -15,6 +15,7 @@ defmodule DtodoaquiWeb.RatingView do
       review_id: rating.review_id,
       type: rating.type,
       value: rating.value,
+      user_id: rating.user_id,
       max: rating.max}
   end
 
