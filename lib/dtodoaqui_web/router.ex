@@ -81,7 +81,8 @@ defmodule DtodoaquiWeb.Router do
     get "/listings/:id/images", ImageController, :get_images
     get "/listings/:id/reviews", ReviewController, :get_reviews
 
-
+    resources "/claims", ClaimController
+    resources "/reports", ReportController
     #forward "/graphiql", Absinthe.Plug.GraphiQL,
     #        schema: DtodoaquiWeb.Schema.Schema,
     #        interface: :simple,
