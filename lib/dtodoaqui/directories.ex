@@ -640,9 +640,10 @@ defmodule Dtodoaqui.Directories do
     rating = case y do
       nil -> 0
       0 -> 0
+      0 -> 0
       1 -> x/y
     end
-    rating |> IO.inspect()
+    0 |> IO.inspect()
     #|> Enum.map( fn { review, username } -> review |> Map.put(:username, username) end)
   end
 
