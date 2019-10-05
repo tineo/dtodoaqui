@@ -1,5 +1,10 @@
 # Dtodoaqui
 
+UBUNTU DEPS:
+
+sudo apt-get install build-essential
+
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
