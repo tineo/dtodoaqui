@@ -44,7 +44,6 @@ defmodule Dtodoaqui.Accounts do
   defp get_by_email(email) when is_binary(email) do
     case Repo.get_by(User, email: email) do
       nil ->
-        dummy_checkpw()
         {:error, "Login error."}
       user ->
         {:ok, user}
@@ -54,7 +53,6 @@ defmodule Dtodoaqui.Accounts do
   defp get_by_username(username) when is_binary(username) do
     case Repo.get_by(User, username: username) do
       nil ->
-        dummy_checkpw()
         {:error, "Login error."}
       user ->
         {:ok, user}
@@ -62,7 +60,7 @@ defmodule Dtodoaqui.Accounts do
   end
 
   defp verify_password(password, %User{} = user) when is_binary(password) do
-    if checkpw(password, user.password) do
+    if  Bcrypt.verify_pass(password, user.password) do
       {:ok, user}
     else
       {:error, :invalid_password}

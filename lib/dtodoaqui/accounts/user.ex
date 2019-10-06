@@ -52,7 +52,7 @@ defmodule Dtodoaqui.Accounts.User do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{password: pass}}
         ->
-          put_change(changeset, :password, Comeonin.Bcrypt.hashpwsalt(pass))
+          put_change(changeset, :password,  Bcrypt.hash_pwd_salt(pass))
       _ ->
           changeset
     end
